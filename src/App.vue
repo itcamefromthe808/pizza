@@ -2,23 +2,31 @@
   <main id="app">
     <h1>{{ msg }}</h1>
 
-    <form id="query-form" action="">
-      <button v-on:click="searchZip">Search your Zip Code</button>
-    </form>
+    <SearchZip></SearchZip>
+
+    <SelectRestaurant></SelectResaurant>
+
   </main>
 </template>
 
 <script>
-module.exports = {
+import Vue from 'vue';
+import VeeValidate from 'vee-validate';
+
+Vue.use(VeeValidate);
+
+import SearchZip from './forms/SearchZip.vue';
+import SelectRestaurant from './forms/SelectRestaurant.vue';
+
+export default {
   name: 'app',
+  components: {
+    SearchZip,
+    SelectRestaurant
+  },
   data () {
     return {
-      msg: 'Welcome to the random pizza generator!'
-    }
-  },
-  methods: {
-    searchZip: function() {
-      console.log('searching zip');
+      msg: "Welcome to the random Domino's pizza generator!"
     }
   }
 }
