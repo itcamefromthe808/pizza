@@ -27,9 +27,6 @@ export default {
              // handle error
              return;
          }
-
-         //
-
      });
    }
  }

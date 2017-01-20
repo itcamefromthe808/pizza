@@ -1,6 +1,6 @@
 <template>
   <main id="app">
-    <h1>{{ msg }}</h1>
+    <h1>Welcome to the random Domino's pizza generator!</h1>
 
     <SearchZip></SearchZip>
 
@@ -15,19 +15,15 @@ import VeeValidate from 'vee-validate';
 
 Vue.use(VeeValidate);
 
-import SearchZip from './forms/SearchZip.vue';
-import SelectRestaurant from './forms/SelectRestaurant.vue';
+import SearchZip from './components/SearchZip.vue';
+import SelectRestaurant from './components/SelectRestaurant.vue';
+
 
 export default {
   name: 'app',
   components: {
     SearchZip,
     SelectRestaurant
-  },
-  data () {
-    return {
-      msg: "Welcome to the random Domino's pizza generator!"
-    }
   }
 }
 </script>
