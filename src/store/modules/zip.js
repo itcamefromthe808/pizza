@@ -13,28 +13,37 @@ const getters = {
 
 // action
 const actions = {
-  lookupZipCode ({ commit }) {
+  lookup ({commit, state}, zip ) {
+    commit(types.ZIPCODE_REQUEST)
     pizza.findStore(
       zip,
       () => commit(types.ZIPCODE_SUCCESS),
-      () => commit(types.ZIPCODE_FAILURE, { zip })
-    })
+      () => commit(types.ZIPCODE_FAILURE)
+    )
   }
 }
 
 // mutation
 const mutations = {
-  [types.ZIPCODE_REQUEST] (state, { zip }) {
-    state.zip = ''
+  [types.ZIPCODE_REQUEST] (state) {
     state.zipCodeStatus = null
-  }
+  },
 
-  [types.ZIPCODE_SUCCESS] (state) {
+  [types.ZIPCODE_SUCCESS] (state, { zipcodeResults }) {
+    console.log('zipcode success')
     state.zipCodeStatus = 'success'
-  }
+  },
 
-  [types.ZIPCODE_FAILURE] (state, { zip }) {
-    state.zip = zip
+  [types.ZIPCODE_FAILURE] (state) {
+    console.log('zipcode failed')
+    state.zip = '';
     state.zipCodeStatus = 'failed'
   }
+}
+
+export default {
+  state,
+  getters,
+  actions,
+  mutations
 }

@@ -2,7 +2,7 @@ var path = require('path')
 var webpack = require('webpack')
 
 module.exports = {
-  entry: './src/main.js',
+  entry: './src/app.js',
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
@@ -40,12 +40,25 @@ module.exports = {
   },
   resolve: {
     alias: {
-      'vue$': 'vue/dist/vue.common.js'
+      'vue$': 'vue/dist/vue.common.js',
+      'dominos$': 'pizzapi/dominos-pizza-api.js'
     }
+  },
+  node: {
+    console: true,
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty'
   },
   devServer: {
     historyApiFallback: true,
-    noInfo: true
+    proxy: {
+      '/power':{
+        target:'https://order.dominos.com',
+        secure:false,
+        changeOrigin:true
+      }
+    }
   },
   performance: {
     hints: false

@@ -2,28 +2,23 @@
   <main id="app">
     <h1>Welcome to the random Domino's pizza generator!</h1>
 
-    <SearchZip></SearchZip>
+    <Zip></Zip>
 
-    <SelectRestaurant></SelectResaurant>
+    <Restaurants></Restaurants>
 
   </main>
 </template>
 
 <script>
-import Vue from 'vue';
-import VeeValidate from 'vee-validate';
-
-Vue.use(VeeValidate);
-
-import SearchZip from './components/SearchZip.vue';
-import SelectRestaurant from './components/SelectRestaurant.vue';
+import Zip from './Zip.vue'
+import Restaurants from './Restaurants.vue'
 
 
 export default {
   name: 'app',
   components: {
-    SearchZip,
-    SelectRestaurant
+    Zip,
+    Restaurants
   }
 }
 </script>
