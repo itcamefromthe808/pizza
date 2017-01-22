@@ -14,7 +14,6 @@
 import { mapActions } from 'vuex'
 
 export default {
-  name: 'search-form',
   data () {
     return {
       zip:''

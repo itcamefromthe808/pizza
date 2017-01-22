@@ -1,11 +1,6 @@
 import pizza from 'dominos'
 import Vue from 'vue'
 
-let storeInfo = function(r) {
-  console.log(r)
-  return r
-}
-
 export default {
   findStore ( zip, success, failure ) {
     // query dominos api
@@ -15,6 +10,20 @@ export default {
       (payload) => {
         if (payload.success && payload.result.Stores.length) {
           success(payload.result.Stores)
+        } else {
+          failure(payload)
+        }
+
+      }
+    )
+  },
+  getMenu (StoreID, success, failure) {
+    let myStore = new pizza.Store(StoreID)
+    myStore.ID = StoreID
+    myStore.getFriendlyNames(
+      (payload) => {
+        if (payload.success && payload.result.length) {
+          success(payload.result)
         } else {
           failure(payload)
         }

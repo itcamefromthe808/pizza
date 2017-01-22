@@ -12,7 +12,6 @@ const getters = {
 // mutations
 const mutations = {
   [types.RECEIVE_RESTAURANTS] (state, {stores}) {
-    console.log(stores)
     state.restaurants = stores
   },
   [types.CLEAR_RESTAURANTS] () {

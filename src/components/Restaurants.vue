@@ -13,13 +13,13 @@
 
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   computed: mapGetters({
     restaurants: 'allRestaurants'
   }),
-  methods: mapMutations([
+  methods: mapActions([
     'selectRestaurant'
   ]),
   data () {
