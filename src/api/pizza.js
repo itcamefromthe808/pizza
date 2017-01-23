@@ -20,9 +20,9 @@ export default {
   getMenu (StoreID, success, failure) {
     let myStore = new pizza.Store(StoreID)
     myStore.ID = StoreID
-    myStore.getFriendlyNames(
+    myStore.getMenu(
       (payload) => {
-        if (payload.success && payload.result.length) {
+        if (payload.success && payload.result) {
           success(payload.result)
         } else {
           failure(payload)

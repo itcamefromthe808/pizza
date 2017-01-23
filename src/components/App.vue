@@ -6,19 +6,26 @@
 
     <Restaurants></Restaurants>
 
+    <Options></Options>
+
+    <Pizza></Pizza>
+
   </main>
 </template>
 
 <script>
 import Zip from './Zip.vue'
 import Restaurants from './Restaurants.vue'
-
+import Options from './Options.vue'
+import Pizza from './Pizza.vue'
 
 export default {
   name: 'app',
   components: {
     Zip,
-    Restaurants
+    Restaurants,
+    Options,
+    Pizza
   }
 }
 </script>
