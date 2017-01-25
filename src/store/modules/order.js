@@ -3,25 +3,10 @@ import options from './options'
 import menu from './menu'
 
 const state = {
-  order: [],
+  pizzas: [],
   options: options,
   menu: menu
 }
-
-/*
-Flavors->Pizza = list of crust types
-Sizes->Pizza = Sizes
-Toppings->Pizza = Toppings
-CookingInstructions = Cooking Instructions
-CookingInstructionGroups = Groups for the above
-
-pizza object format
-{
-  size:{},
-  crust:{},
-  toppings:[]
-}
-*/
 
 const mathings = {
   hungerPerPie: {
@@ -34,11 +19,13 @@ const mathings = {
 }
 
 // local utilities
-const buildPizzas = (mstate) => {
-  let totalHunger = state.options.hunger * state.options.people,
+const buildPizzas = (store) => {
+  let people = store.getters.getPeopleOption,
+      hunger = store.getters.getHungerOption,
+      totalHunger = hunger * people,
       pieSize = 10,
       numPies = 1,
-      idealPies = Math.floor(Math.log(state.options.people) / Math.log(mathings.pieScalingFactor) + 1)
+      idealPies = Math.floor(Math.log( people )/Math.log( mathings.pieScalingFactor ) + 1)
       /*
         ^^^^^^^^^^
         ideal is one pie per person, and scales logarithmically
@@ -58,7 +45,7 @@ const buildPizzas = (mstate) => {
   console.log('pieFactor:', totalHunger / mathings.hungerPerPie[pieSize])
 
   return {
-    size: sizes.find((s) => s.Code == pieSize),
+    size: store.getters.getSizes[pieSize],
     quantity: numPies
   }
 }
@@ -67,7 +54,7 @@ const buildPizzas = (mstate) => {
 // getters
 const getters = {
   getPizzaShortDescriptions: state => {
-    return state.order.map( (pie) => {
+    return state.pizzas.map( (pie) => {
       return {
         size: pie.size.Name? pie.size.Name : '' ,
         crust: pie.crust.Name? pie.crust.Name : '',
@@ -79,19 +66,21 @@ const getters = {
 
 // actions
 const actions = {
-  buildOrder: (state, { menu }) => {
-    let pizzaPies = buildPizzas(menu,state),
-        newState = []
-
-    for (let p=1; p<=pizzaPies.quantity; p++) {
-      newState.push({
-        crust:pickCrust(menu),
-        size:pizzaPies.size,
-        toppings:pickToppings(menu,state)
-      })
-    }
-
-    state.order = newState
+  buildOrder: (store) => {
+    let pizzaPies = buildPizzas(store)
+    console.log(pizzaPies)
+    // Math.floor(Math.random() * state.toppings.length
+    //     newState = []
+    //
+    // for (let p=1; p<=pizzaPies.quantity; p++) {
+    //   newState.push({
+    //     crust:pickCrust(menu),
+    //     size:pizzaPies.size,
+    //     toppings:pickToppings(menu,state)
+    //   })
+    // }
+    //
+    // state.order = newState
   }
 }
 

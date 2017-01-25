@@ -14,10 +14,13 @@ export const setZip = ({commit}, zip) => {
   )
 }
 
-export const selectRestaurant = ({commit}, StoreID) => {
+export const selectRestaurant = (store, StoreID) => {
   pizza.getMenu(
     StoreID,
-    (menu) => commit(types.RECEIVE_MENU, { menu }),
+    (menu) => {
+      store.commit(types.RECEIVE_MENU, { menu })
+      store.dispatch('buildOrder')
+    },
     () => {
       console.log('menu failure')
     }

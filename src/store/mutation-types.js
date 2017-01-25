@@ -8,3 +8,4 @@ export const SET_OPTION_PEOPLE = 'SET_PEOPLE'
 export const SET_OPTION_HUNGER = 'SET_HUNGER'
 
 export const BUILD_PIZZA = 'BUILD_PIZZA'
+export const BUILD_ORDER = 'BUILD_ORDER'
