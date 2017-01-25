@@ -1,9 +1,11 @@
 import * as types from '../mutation-types'
 import options from './options'
+import menu from './menu'
 
 const state = {
   order: [],
-  options: options
+  options: options,
+  menu: menu
 }
 
 /*
@@ -32,75 +34,34 @@ const mathings = {
 }
 
 // local utilities
-const getValidEntries = (list) => {
-      return Object.getOwnPropertyNames(list).reduce((acc,val) => {
-        if (list[val].Code && (/[A-Z0-9]+/).test(list[val].Code)) acc.push(list[val])
-        return acc
-      },[])
-    },
-
-    getValidSauces = (list) => {
-      return Object.getOwnPropertyNames(list).reduce((acc,val) => {
-        if (list[val].Code && (/[A-Z0-9]+/).test(list[val].Code) && list[val].Tags.Sauce) acc.push(list[val])
-        return acc
-      },[])
-    },
-
-    getValidToppings = (list) => {
-      return Object.getOwnPropertyNames(list).reduce((acc,val) => {
-        if (list[val].Code && (/[A-Z0-9]+/).test(list[val].Code) && !list[val].Tags.Sauce) acc.push(list[val])
-        return acc
-      },[])
-    },
-
-    pickCrust = (menu) => {
-      const crusts = getValidEntries(menu.Flavors.Pizza)
-      return crusts[Math.floor(Math.random() * crusts.length)]
-    },
-
-    buildPizzas = (menu,state) => {
-      const sizes = getValidEntries(menu.Sizes.Pizza)
-      let totalHunger = state.options.hunger * state.options.people,
-          pieSize = 10,
-          numPies = 1,
-          idealPies = Math.floor(Math.log(state.options.people) / Math.log(mathings.pieScalingFactor) + 1)
-
+const buildPizzas = (mstate) => {
+  let totalHunger = state.options.hunger * state.options.people,
+      pieSize = 10,
+      numPies = 1,
+      idealPies = Math.floor(Math.log(state.options.people) / Math.log(mathings.pieScalingFactor) + 1)
       /*
         ^^^^^^^^^^
         ideal is one pie per person, and scales logarithmically
         log(people) / log(scalingFactor)
       */
 
-      for (let s in sizes) {
-        // console.log('loop:',sizes[s].Code,' mathings:',mathings.hungerPerPie[sizes[s].Code],' hunger:',totalHunger)
-        if (totalHunger / mathings.hungerPerPie[sizes[s].Code] < idealPies) {
-          pieSize = sizes[s].Code
-          break;
-        }
-      }
-
-      numPies = Math.ceil(totalHunger / mathings.hungerPerPie[pieSize])
-
-      // console.log('numPies:', numPies, ' sizeToUse:', pieSize)
-
-      return {
-        size: sizes.find((s) => s.Code == pieSize),
-        quantity: numPies
-      }
-    },
-
-    pickToppings = (menu,state) => {
-      const toppings = getValidToppings(menu.Toppings.Pizza)
-      const sauces = getValidSauces(menu.Toppings.Pizza)
-
-      let list = [sauces[Math.floor(Math.random() * sauces.length)]]
-
-      for (let i=0; i<state.options.toppings; i++) {
-        list.push( toppings[Math.floor(Math.random() * toppings.length)] )
-      }
-
-      return list
+  for (let s in mathings.hungerPerPie) {
+    // console.log('loop:',sizes[s].Code,' mathings:',mathings.hungerPerPie[sizes[s].Code],' hunger:',totalHunger)
+    if (totalHunger / mathings.hungerPerPie[s] < idealPies) {
+      pieSize = s
+      break;
     }
+  }
+
+  numPies = Math.ceil(totalHunger / mathings.hungerPerPie[pieSize])
+
+  console.log('pieFactor:', totalHunger / mathings.hungerPerPie[pieSize])
+
+  return {
+    size: sizes.find((s) => s.Code == pieSize),
+    quantity: numPies
+  }
+}
 
 
 // getters
@@ -116,9 +77,9 @@ const getters = {
   }
 }
 
-// mutations
-const mutations = {
-  [types.RECEIVE_MENU] (state, { menu }) {
+// actions
+const actions = {
+  buildOrder: (state, { menu }) => {
     let pizzaPies = buildPizzas(menu,state),
         newState = []
 
@@ -137,8 +98,9 @@ const mutations = {
 export default {
   state,
   getters,
-  mutations,
+  actions,
   modules: {
-    options
+    options,
+    menu
   }
 }
