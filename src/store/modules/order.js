@@ -19,7 +19,7 @@ const mathings = {
 }
 
 // local utilities
-const buildPizzas = (store) => {
+const assessHunger = (store) => {
   let people = store.getters.getPeopleOption,
       hunger = store.getters.getHungerOption,
       totalHunger = hunger * people,
@@ -68,20 +68,39 @@ const getters = {
 // actions
 const actions = {
   buildOrder: (store) => {
-    let pizzaPies = buildPizzas(store)
-    console.log(pizzaPies)
-    // Math.floor(Math.random() * state.toppings.length
-    //     newState = []
-    //
-    // for (let p=1; p<=pizzaPies.quantity; p++) {
-    //   newState.push({
-    //     crust:pickCrust(menu),
-    //     size:pizzaPies.size,
-    //     toppings:pickToppings(menu,state)
-    //   })
-    // }
-    //
-    // state.order = newState
+    let pizzaPies = assessHunger(store),
+        crusts = store.getters.getCrusts,
+        sauces = store.getters.getSauces,
+        cheeses = store.getters.getCheeses,
+        numToppings = store.getters.getToppingOption,
+        toppings = store.getters.getToppings,
+        pizzas = []
+
+    for (let p=1; p<=pizzaPies.quantity; p++) {
+      // pick one sauce and one cheese (there's only one anyway)
+      let pizzaToppings = [
+        sauces[Math.floor(Math.random() * sauces.length)],
+        cheeses[Math.floor(Math.random() * cheeses.length)]
+      ]
+
+      for (let t=1; t<=numToppings; t++) {
+        pizzaToppings.push(toppings[Math.floor(Math.random() * toppings.length)])
+      }
+
+      pizzas.push({
+        crust:crusts[Math.floor(Math.random() * crusts.length)],
+        size:pizzaPies.size,
+        toppings:pizzaToppings
+      })
+    }
+
+    store.commit(types.SET_PIZZA_LIST, {pizzas})
+  }
+}
+
+const mutations = {
+  [types.SET_PIZZA_LIST] (state, {pizzas}) {
+    state.pizzas = pizzas
   }
 }
 
@@ -89,6 +108,7 @@ export default {
   state,
   getters,
   actions,
+  mutations,
   modules: {
     options,
     menu

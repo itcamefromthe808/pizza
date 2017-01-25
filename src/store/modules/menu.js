@@ -63,11 +63,11 @@ const getValidEntries = (menu) => {
     }
 
 const getters = {
+  getSizes: state => state.sizes,
   getCrusts: state => state.crusts,
-  getCheeses: state => state.cheeses,
   getSauces: state => state.sauces,
-  getToppings: state => state.toppings,
-  getSizes: state => state.sizes
+  getCheeses: state => state.cheeses,
+  getToppings: state => state.toppings
 }
 
 const mutations = {
@@ -76,6 +76,7 @@ const mutations = {
     state.sizes = getValidSizes(menu.Sizes.Pizza)
     state.crusts = getValidEntries(menu.Flavors.Pizza)
     state.sauces = getValidSauces(menu.Toppings.Pizza)
+    state.cheeses = getValidCheeses(menu.Toppings.Pizza)
     state.toppings = getValidToppings(menu.Toppings.Pizza)
   }
 }

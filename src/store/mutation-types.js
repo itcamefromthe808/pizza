@@ -9,3 +9,4 @@ export const SET_OPTION_HUNGER = 'SET_HUNGER'
 
 export const BUILD_PIZZA = 'BUILD_PIZZA'
 export const BUILD_ORDER = 'BUILD_ORDER'
+export const SET_PIZZA_LIST = 'SET_PIZZA_LIST'
