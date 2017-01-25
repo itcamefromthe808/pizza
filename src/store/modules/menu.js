@@ -38,8 +38,6 @@ const getValidEntries = (menu) => {
             return acc
           }, {})
 
-      console.log(SizeObj)
-
       return SizeObj
     },
 

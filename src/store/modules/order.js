@@ -52,6 +52,7 @@ const buildPizzas = (store) => {
 
 
 // getters
+// move this to menu.js
 const getters = {
   getPizzaShortDescriptions: state => {
     return state.pizzas.map( (pie) => {
