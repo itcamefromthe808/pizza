@@ -1,6 +1,9 @@
 import pizza from 'dominos'
 import Vue from 'vue'
 
+import storeData from '../assets/store-locator.json'
+import menuData from '../assets/menu.json'
+
 export default {
   findStore ( zip, success, failure ) {
     // query dominos api
@@ -11,9 +14,9 @@ export default {
         if (payload.success && payload.result.Stores.length) {
           success(payload.result.Stores)
         } else {
-          failure(payload)
+          // failure(payload)
+          success(storeData.Stores)
         }
-
       }
     )
   },
@@ -25,7 +28,8 @@ export default {
         if (payload.success && payload.result) {
           success(payload.result)
         } else {
-          failure(payload)
+          // failure(payload)
+          success(menuData)
         }
 
       }

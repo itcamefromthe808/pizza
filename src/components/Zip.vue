@@ -1,5 +1,6 @@
 <template>
   <form>
+    <h2>Let's find a store near you!</h2>
     <fieldset>
       <legend>Zip Code</legend>
       <input type="text" name="zipcode" v-model="zip" placeholder="Enter Zip Code" v-validate data-vv-rules="required|digits:5"></input>

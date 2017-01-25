@@ -2,13 +2,13 @@
   <main id="app">
     <h1>Welcome to the random Domino's pizza generator!</h1>
 
+    <Options></Options>
+
     <Zip></Zip>
 
     <Restaurants></Restaurants>
 
-    <Options></Options>
-
-    <Pizza></Pizza>
+    <Order></Order>
 
   </main>
 </template>
@@ -17,7 +17,7 @@
 import Zip from './Zip.vue'
 import Restaurants from './Restaurants.vue'
 import Options from './Options.vue'
-import Pizza from './Pizza.vue'
+import Order from './Order.vue'
 
 export default {
   name: 'app',
@@ -25,7 +25,7 @@ export default {
     Zip,
     Restaurants,
     Options,
-    Pizza
+    Order
   }
 }
 </script>

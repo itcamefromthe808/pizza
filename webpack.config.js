@@ -56,7 +56,8 @@ module.exports = {
       '/power':{
         target:'https://order.dominos.com',
         secure:false,
-        changeOrigin:true
+        changeOrigin:true,
+        proxyTimeout:500
       }
     }
   },

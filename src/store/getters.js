@@ -5,3 +5,7 @@ export const getPizzaShortDescription = state => {
     toppings: state.pizza.pie.toppings.length? state.pizza.pie.toppings.map((t) => t.Name) : []
   }
 }
+
+// export const getToppingOption = state => state.pizza.options.toppings
+// export const getPeopleOption = state => state.pizza.options.toppings
+// export const getHungerOption = state => state.pizza.options.toppings
