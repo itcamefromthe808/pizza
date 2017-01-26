@@ -10,16 +10,19 @@
         <li v-for="t in pie.toppings">{{t}}</li>
       </ul>
     </div>
-    <button>Rebuild Pizza</button>
+    <button @click.prevent="rebuildPizza">Rebuild Pizza</button>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters,mapActions } from 'vuex'
 
 export default {
   computed: mapGetters({
     pizzas: 'getPizzaShortDescriptions'
-  })
+  }),
+  methods: mapActions([
+    'rebuildPizza'
+  ])
 }
 </script>

@@ -2,6 +2,9 @@
 
 > Random Domino's pizza generator
 
+## TODO:
+- Tweak pie size logic for large orders
+
 ## Build Setup
 
 ``` bash

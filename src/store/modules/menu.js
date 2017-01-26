@@ -3,7 +3,9 @@ import * as types from '../mutation-types'
 const state = {
   raw:[],
   sizes:[],
-  toppings:[],
+  meats:[],
+  veggies:[],
+  nonmeats:[],
   cheeses:[],
   sauces:[]
 }
@@ -55,9 +57,23 @@ const getValidEntries = (menu) => {
       },[])
     },
 
-    getValidToppings = (menu) => {
+    getValidMeats = (menu) => {
       return Object.getOwnPropertyNames(menu).reduce((acc,val) => {
-        if (menu[val].Code && (/[A-Z0-9]+/).test(menu[val].Code) && !menu[val].Tags.Sauce && !menu[val].Tags.Cheese) acc.push(menu[val])
+        if (menu[val].Code && (/[A-Z0-9]+/).test(menu[val].Code) && menu[val].Tags.Meat && !menu[val].Tags.Sauce) acc.push(menu[val])
+        return acc
+      },[])
+    },
+
+    getValidVeggies = (menu) => {
+      return Object.getOwnPropertyNames(menu).reduce((acc,val) => {
+        if (menu[val].Code && (/[A-Z0-9]+/).test(menu[val].Code) && menu[val].Tags.Vege && !menu[val].Tags.Sauce) acc.push(menu[val])
+        return acc
+      },[])
+    },
+
+    getValidNonMeats = (menu) => {
+      return Object.getOwnPropertyNames(menu).reduce((acc,val) => {
+        if (menu[val].Code && (/[A-Z0-9]+/).test(menu[val].Code) && !menu[val].Tags.Meat && !menu[val].Tags.Sauce) acc.push(menu[val])
         return acc
       },[])
     }
@@ -67,7 +83,8 @@ const getters = {
   getCrusts: state => state.crusts,
   getSauces: state => state.sauces,
   getCheeses: state => state.cheeses,
-  getToppings: state => state.toppings
+  getMeats: state => state.meats,
+  getNonMeats: state => state.nonmeats
 }
 
 const mutations = {
@@ -77,7 +94,9 @@ const mutations = {
     state.crusts = getValidEntries(menu.Flavors.Pizza)
     state.sauces = getValidSauces(menu.Toppings.Pizza)
     state.cheeses = getValidCheeses(menu.Toppings.Pizza)
-    state.toppings = getValidToppings(menu.Toppings.Pizza)
+    state.meats = getValidMeats(menu.Toppings.Pizza)
+    state.veggies = getValidVeggies(menu.Toppings.Pizza)
+    state.nonmeats = getValidNonMeats(menu.Toppings.Pizza)
   }
 }
 

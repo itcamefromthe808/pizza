@@ -27,15 +27,6 @@ export const selectRestaurant = (store, StoreID) => {
   )
 }
 
-
-export const setHungerOption = ({commit}, e) => {
-  commit(types.SET_OPTION_HUNGER, { hunger: e.target.value })
-}
-
-export const setPeopleOption = ({commit}, e) => {
-  commit(types.SET_OPTION_PEOPLE, { people: e.target.value })
-}
-
-export const setToppingOption = ({commit}, e) => {
-  commit(types.SET_OPTION_TOPPINGS, { toppings: e.target.value })
+export const rebuildPizza = (store) => {
+  store.dispatch('buildOrder')
 }
