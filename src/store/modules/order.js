@@ -71,13 +71,13 @@ const assessHunger = (store) => {
             toppingOption = cheeseOption? store.getters.getToppingOption + 1 : store.getters.getToppingOption,
             dupeOption = store.getters.getDupesOption,
             veggieSlider = store.getters.getVeggieSlider,
-            meats = store.getters.getMeats,
-            nonmeats = cheeseOption? store.getters.getNonMeats.filter((nm) => !(/(cheese|parmesan)/i).test(nm.Name)): store.getters.getNonMeats
+            meats = store.getters.getMeats.concat(),
+            nonmeats = cheeseOption? store.getters.getNonMeats.filter((nm) => !(/(cheese|parmesan)/i).test(nm.Name)): store.getters.getNonMeats.concat()
 
         for (let t=1; t<=toppingOption; t++) {
           // pull meat or veggie based on preferences
-          let topping_factor = Math.floor(veggieSlider * Math.random()),
-              topping_to_add = (topping_factor < veggieSlider) ? nonmeats.concat() : meats.concat(),
+          let topping_factor = Math.floor(100 * Math.random()),
+              topping_to_add = (topping_factor < veggieSlider) ? nonmeats : meats,
               idx = Math.floor(topping_to_add.length * Math.random())
 
           // add to list
