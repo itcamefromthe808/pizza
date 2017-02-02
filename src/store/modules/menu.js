@@ -84,7 +84,8 @@ const getters = {
   getSauces: state => state.sauces,
   getCheeses: state => state.cheeses,
   getMeats: state => state.meats,
-  getNonMeats: state => state.nonmeats
+  getNonMeats: state => state.nonmeats,
+  getVeggies: state => state.veggies
 }
 
 const mutations = {

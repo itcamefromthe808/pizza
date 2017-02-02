@@ -71,8 +71,9 @@ const assessHunger = (store) => {
             toppingOption = cheeseOption? store.getters.getToppingOption + 1 : store.getters.getToppingOption,
             dupeOption = store.getters.getDupesOption,
             veggieSlider = store.getters.getVeggieSlider,
-            meats = store.getters.getMeats.concat(),
-            nonmeats = cheeseOption? store.getters.getNonMeats.filter((nm) => !(/(cheese|parmesan)/i).test(nm.Name)): store.getters.getNonMeats.concat()
+
+            meats = [...store.getters.getMeats],
+            nonmeats = cheeseOption? [...store.getters.getNonMeats.filter((nm) => !(/(cheese|parmesan)/i).test(nm.Name))] : [...store.getters.getNonMeats]
 
         for (let t=1; t<=toppingOption; t++) {
           // pull meat or veggie based on preferences
@@ -85,6 +86,8 @@ const assessHunger = (store) => {
 
           // remove item if dupes are not desired
           if (dupeOption) topping_to_add.splice(idx,1)
+
+          console.log(toppings.length, meats.length, nonmeats.length, (topping_factor < veggieSlider));
         }
 
         return toppings
