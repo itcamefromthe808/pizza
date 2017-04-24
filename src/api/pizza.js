@@ -1,11 +1,10 @@
 import pizza from 'dominos'
-import Vue from 'vue'
 
 import storeData from '../assets/store-locator.json'
 import menuData from '../assets/menu.json'
 
 export default {
-  findStore ( zip, success, failure ) {
+  findStore (zip, success, failure) {
     // query dominos api
     pizza.Util.findNearbyStores(
       zip,
@@ -21,7 +20,7 @@ export default {
     )
   },
   getMenu (StoreID, success, failure) {
-    let myStore = new pizza.Store(StoreID)
+    const myStore = new pizza.Store(StoreID)
     myStore.ID = StoreID
     myStore.getMenu(
       (payload) => {
@@ -31,7 +30,6 @@ export default {
           // failure(payload)
           success(menuData)
         }
-
       }
     )
   }

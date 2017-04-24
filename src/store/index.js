@@ -13,7 +13,7 @@ export default new Vuex.Store({
     restaurants,
     order
   },
-  data() {
+  data () {
     return {
       StoreID: null
     }

@@ -11,7 +11,7 @@ const getters = {
 
 // mutations
 const mutations = {
-  [types.RECEIVE_RESTAURANTS] (state, {stores}) {
+  [types.RECEIVE_RESTAURANTS] (state, { stores }) {
     state.restaurants = stores
   },
   [types.CLEAR_RESTAURANTS] () {

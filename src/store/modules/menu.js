@@ -1,13 +1,13 @@
 import * as types from '../mutation-types'
 
 const state = {
-  raw:[],
-  sizes:[],
-  meats:[],
-  veggies:[],
-  nonmeats:[],
-  cheeses:[],
-  sauces:[]
+  raw: [],
+  sizes: [],
+  meats: [],
+  veggies: [],
+  nonmeats: [],
+  cheeses: [],
+  sauces: []
 }
 
 /*
@@ -27,56 +27,56 @@ pizza object format
 
 // local utilities
 const getValidEntries = (menu) => {
-      return Object.getOwnPropertyNames(menu).reduce((acc,val) => {
-        if (menu[val].Code && (/[A-Z0-9]+/).test(menu[val].Code)) acc.push(menu[val])
-        return acc
-      },[])
-    },
+  return Object.getOwnPropertyNames(menu).reduce((acc, val) => {
+    if (menu[val].Code && (/[A-Z0-9]+/).test(menu[val].Code)) acc.push(menu[val])
+    return acc
+  }, [])
+}
 
-    getValidSizes = (menu) => {
-      let sizes = getValidEntries(menu),
-          SizeObj = sizes.reduce( (acc, cur, i) => {
-            acc[cur.Code] = cur
-            return acc
-          }, {})
+const getValidSizes = (menu) => {
+  const sizes = getValidEntries(menu)
+  const SizeObj = sizes.reduce((acc, cur, i) => {
+    acc[cur.Code] = cur
+    return acc
+  }, {})
 
-      return SizeObj
-    },
+  return SizeObj
+}
 
-    getValidSauces = (menu) => {
-      return Object.getOwnPropertyNames(menu).reduce((acc,val) => {
-        if (menu[val].Code && (/[A-Z0-9]+/).test(menu[val].Code) && menu[val].Tags.Sauce) acc.push(menu[val])
-        return acc
-      },[])
-    },
+const getValidSauces = (menu) => {
+  return Object.getOwnPropertyNames(menu).reduce((acc, val) => {
+    if (menu[val].Code && (/[A-Z0-9]+/).test(menu[val].Code) && menu[val].Tags.Sauce) acc.push(menu[val])
+    return acc
+  }, [])
+}
 
-    getValidCheeses = (menu) => {
-      return Object.getOwnPropertyNames(menu).reduce((acc,val) => {
-        if (menu[val].Code && (/[A-Z0-9]+/).test(menu[val].Code) && menu[val].Tags.Cheese) acc.push(menu[val])
-        return acc
-      },[])
-    },
+const getValidCheeses = (menu) => {
+  return Object.getOwnPropertyNames(menu).reduce((acc, val) => {
+    if (menu[val].Code && (/[A-Z0-9]+/).test(menu[val].Code) && menu[val].Tags.Cheese) acc.push(menu[val])
+    return acc
+  }, [])
+}
 
-    getValidMeats = (menu) => {
-      return Object.getOwnPropertyNames(menu).reduce((acc,val) => {
-        if (menu[val].Code && (/[A-Z0-9]+/).test(menu[val].Code) && menu[val].Tags.Meat && !menu[val].Tags.Sauce) acc.push(menu[val])
-        return acc
-      },[])
-    },
+const getValidMeats = (menu) => {
+  return Object.getOwnPropertyNames(menu).reduce((acc, val) => {
+    if (menu[val].Code && (/[A-Z0-9]+/).test(menu[val].Code) && menu[val].Tags.Meat && !menu[val].Tags.Sauce) acc.push(menu[val])
+    return acc
+  }, [])
+}
 
-    getValidVeggies = (menu) => {
-      return Object.getOwnPropertyNames(menu).reduce((acc,val) => {
-        if (menu[val].Code && (/[A-Z0-9]+/).test(menu[val].Code) && menu[val].Tags.Vege && !menu[val].Tags.Sauce) acc.push(menu[val])
-        return acc
-      },[])
-    },
+const getValidVeggies = (menu) => {
+  return Object.getOwnPropertyNames(menu).reduce((acc, val) => {
+    if (menu[val].Code && (/[A-Z0-9]+/).test(menu[val].Code) && menu[val].Tags.Vege && !menu[val].Tags.Sauce) acc.push(menu[val])
+    return acc
+  }, [])
+}
 
-    getValidNonMeats = (menu) => {
-      return Object.getOwnPropertyNames(menu).reduce((acc,val) => {
-        if (menu[val].Code && (/[A-Z0-9]+/).test(menu[val].Code) && !menu[val].Tags.Meat && !menu[val].Tags.Sauce) acc.push(menu[val])
-        return acc
-      },[])
-    }
+const getValidNonMeats = (menu) => {
+  return Object.getOwnPropertyNames(menu).reduce((acc, val) => {
+    if (menu[val].Code && (/[A-Z0-9]+/).test(menu[val].Code) && !menu[val].Tags.Meat && !menu[val].Tags.Sauce) acc.push(menu[val])
+    return acc
+  }, [])
+}
 
 const getters = {
   getSizes: state => state.sizes,

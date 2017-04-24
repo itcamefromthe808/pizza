@@ -1,7 +1,7 @@
 import * as types from './mutation-types'
 import pizza from '../api/pizza'
 
-export const setZip = ({commit}, zip) => {
+export const setZip = ({ commit }, zip) => {
   pizza.findStore(
     zip,
     (stores) => {

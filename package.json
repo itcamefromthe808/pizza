@@ -9,20 +9,25 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
-    "vue": "^2.1.0"
+    "vue": "^2.1.0",
+    "vee-validate": "^2.0.0-beta.18",
+    "vuex": "^2.1.1",
+    "pizzapi": "0.0.8"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",
+    "babel-eslint": "^7.2.3",
     "babel-loader": "^6.0.0",
     "babel-preset-es2015": "^6.0.0",
     "cross-env": "^3.0.0",
     "css-loader": "^0.25.0",
+    "eslint": "^3.19.0",
+    "eslint-config-vue": "^2.0.2",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-vue": "^2.0.1",
     "file-loader": "^0.9.0",
-    "pizzapi": "0.0.8",
-    "vee-validate": "^2.0.0-beta.18",
     "vue-loader": "^10.0.0",
     "vue-template-compiler": "^2.1.0",
-    "vuex": "^2.1.1",
     "webpack": "^2.1.0-beta.25",
     "webpack-dev-server": "^2.1.0-beta.9"
   }

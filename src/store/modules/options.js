@@ -19,42 +19,42 @@ const getters = {
 }
 
 const actions = {
-  setHungerOption: ({commit}, e) => {
+  setHungerOption: ({ commit }, e) => {
     commit(types.SET_OPTION_HUNGER, { hunger: e.target.value })
   },
 
-  setPeopleOption: ({commit}, e) => {
+  setPeopleOption: ({ commit }, e) => {
     commit(types.SET_OPTION_PEOPLE, { people: e.target.value })
   },
 
-  setToppingOption: ({commit}, e) => {
+  setToppingOption: ({ commit }, e) => {
     commit(types.SET_OPTION_TOPPINGS, { toppings: e.target.value })
   },
 
-  setCheeseOption: ({commit}, e) => {
+  setCheeseOption: ({ commit }, e) => {
     commit(types.SET_OPTION_CHEESE, { noCheese: e.target.checked })
   },
 
-  setDupeOption: ({commit}, e) => {
+  setDupeOption: ({ commit }, e) => {
     commit(types.SET_OPTION_DUPES, { noDupes: e.target.checked })
   },
 
-  setVeggieSlider: ({commit}, e) => {
+  setVeggieSlider: ({ commit }, e) => {
     commit(types.SET_OPTION_VEGGIE_SLIDER, { veggieSlider: e.target.value })
   }
 }
 
 const mutations = {
   [types.SET_OPTION_HUNGER] (state, { hunger }) {
-    state.hunger = (hunger > 10)? 10 : (hunger < 1)? 1 : hunger
+    state.hunger = (hunger > 10) ? 10 : (hunger < 1) ? 1 : hunger
   },
 
   [types.SET_OPTION_PEOPLE] (state, { people }) {
-    state.people = (people > 10)? 10 : (people < 1)? 1 : people
+    state.people = (people > 10) ? 10 : (people < 1) ? 1 : people
   },
 
   [types.SET_OPTION_TOPPINGS] (state, { toppings }) {
-    state.toppings = (toppings > 10)? 10 : (toppings < 1)? 1 : toppings
+    state.toppings = (toppings > 10) ? 10 : (toppings < 1) ? 1 : toppings
   },
 
   [types.SET_OPTION_CHEESE] (state, { noCheese }) {
