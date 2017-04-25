@@ -3,6 +3,7 @@ import * as types from '../mutation-types'
 const state = {
   raw: [],
   sizes: [],
+  crusts: [],
   meats: [],
   veggies: [],
   nonmeats: [],
@@ -28,7 +29,7 @@ pizza object format
 // local utilities
 const getValidEntries = (menu) => {
   return Object.getOwnPropertyNames(menu).reduce((acc, val) => {
-    if (menu[val].Code && (/[A-Z0-9]+/).test(menu[val].Code)) acc.push(menu[val])
+    if (menu[val].Code && (/[A-Z0-9]+/i).test(menu[val].Code)) acc.push(menu[val])
     return acc
   }, [])
 }

@@ -8,46 +8,50 @@ const state = {
   menu: menu
 }
 
-const mathings = {
-  hungerPerPie: {
-    10: 6,
-    12: 9,
-    14: 11,
-    16: 15
+const hungerPerPie = [
+  {
+    size: 10,
+    factor: 6
   },
-  pieScalingFactor: 2
-}
+  {
+    size: 12,
+    factor: 9
+  },
+  {
+    size: 14,
+    factor: 11
+  },
+  {
+    size: 16,
+    factor: 15
+  }
+]
+
+const pieScalingFactor = 2
 
 // helper utilities
-const assessHunger = (store) => {
-  // break this up
-  let people = store.getters.getPeopleOption,
-      hunger = store.getters.getHungerOption,
-      totalHunger = hunger * people,
-      pieSize = 10,
-      numPies = 1,
-      idealPies = Math.floor(Math.log( people )/Math.log( mathings.pieScalingFactor ) + 1)
-      /*
-        ^^^^^^^^^^
-        ideal is one pie per person, and scales logarithmically
-        log(people) / log(scalingFactor)
-      */
+const getIdealPies = (people) => {
+  return Math.floor(Math.log(people) / Math.log(pieScalingFactor) + 1)
+}
 
-  for (let s in mathings.hungerPerPie) {
-    // console.log('loop:',sizes[s].Code,' mathings:',mathings.hungerPerPie[sizes[s].Code],' hunger:',totalHunger)
-    if (totalHunger / mathings.hungerPerPie[s] < idealPies) {
-      pieSize = s
+const getPieSize = (totalHunger, idealPies) => {
+  let size = hungerPerPie[0]
+  for (let i = 0; i < hungerPerPie.length; i++) {
+    if (totalHunger / hungerPerPie[i].factor < idealPies) {
+      size = hungerPerPie[i]
       break
     }
   }
+  return size
+}
 
-  numPies = Math.ceil(totalHunger / mathings.hungerPerPie[pieSize])
-
-  console.log('pieFactor:', totalHunger / mathings.hungerPerPie[pieSize])
+const assessHunger = (store) => {
+  const totalHunger = store.getters.getHungerOption * store.getters.getPeopleOption
+  const pieSize = getPieSize(totalHunger, getIdealPies(store.getters.getPeopleOption))
 
   return {
-    size: store.getters.getSizes[pieSize],
-    quantity: numPies
+    size: store.getters.getSizes[pieSize.size],
+    quantity: Math.ceil(totalHunger / pieSize.factor)
   }
 }
 
@@ -66,30 +70,32 @@ const selectSauce = (store) => {
   return sauces[Math.floor(Math.random() * sauces.length)]
 }
 
+const pickAToppingGroup = (veggieSlider) => {
+  return (Math.floor(100 * Math.random()) < veggieSlider)
+}
+
 const selectToppings = (store) => {
-  // break this up for real
-  let toppings = [],
-      cheeseOption = store.getters.getCheeseOption,
-      toppingOption = cheeseOption? store.getters.getToppingOption + 1 : store.getters.getToppingOption,
-      dupeOption = store.getters.getDupesOption,
-      veggieSlider = store.getters.getVeggieSlider,
+  const toppings = []
+  const cheeseOption = store.getters.getCheeseOption
+  const toppingOption = cheeseOption ? store.getters.getToppingOption + 1 : store.getters.getToppingOption
+  const dupeOption = store.getters.getDupesOption
+  const veggieSlider = store.getters.getVeggieSlider
+  // better to use Array.of instead?
+  const meats = [...store.getters.getMeats]
+  const nonmeats = cheeseOption ? [...store.getters.getNonMeats.filter((nm) => !(/(cheese|parmesan)/i).test(nm.Name))] : [...store.getters.getNonMeats]
 
-      meats = [...store.getters.getMeats],
-      nonmeats = cheeseOption? [...store.getters.getNonMeats.filter((nm) => !(/(cheese|parmesan)/i).test(nm.Name))] : [...store.getters.getNonMeats]
-
-  for (let t=1; t<=toppingOption; t++) {
+  for (let t = 1; t <= toppingOption; t++) {
     // pull meat or veggie based on preferences
-    let topping_factor = Math.floor(100 * Math.random()),
-        topping_to_add = (topping_factor < veggieSlider) ? nonmeats : meats,
-        idx = Math.floor(topping_to_add.length * Math.random())
+    const useVeggies = pickAToppingGroup(veggieSlider)
+    const toppingGroup = useVeggies ? nonmeats : meats
+    const idx = Math.floor(toppingGroup.length * Math.random())
+    const toppingToAdd = toppingGroup[idx]
 
     // add to list
-    toppings.push(topping_to_add[idx])
+    toppings.push(toppingToAdd)
 
     // remove item if dupes are not desired
-    if (dupeOption) topping_to_add.splice(idx,1)
-
-    console.log(toppings.length, meats.length, nonmeats.length, (topping_factor < veggieSlider));
+    if (dupeOption) toppingGroup.splice(idx, 1)
   }
 
   return toppings
