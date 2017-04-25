@@ -70,23 +70,22 @@ const selectSauce = (store) => {
   return sauces[Math.floor(Math.random() * sauces.length)]
 }
 
-const pickAToppingGroup = (veggieSlider) => {
+const useVeggieTopping = (veggieSlider) => {
   return (Math.floor(100 * Math.random()) < veggieSlider)
 }
 
 const selectToppings = (store) => {
   const toppings = []
   const cheeseOption = store.getters.getCheeseOption
-  const toppingOption = cheeseOption ? store.getters.getToppingOption + 1 : store.getters.getToppingOption
+  const numToppings = cheeseOption ? store.getters.getToppingOption + 1 : store.getters.getToppingOption
   const dupeOption = store.getters.getDupesOption
   const veggieSlider = store.getters.getVeggieSlider
-  // better to use Array.of instead?
   const meats = [...store.getters.getMeats]
   const nonmeats = cheeseOption ? [...store.getters.getNonMeats.filter((nm) => !(/(cheese|parmesan)/i).test(nm.Name))] : [...store.getters.getNonMeats]
 
-  for (let t = 1; t <= toppingOption; t++) {
+  for (let t = 1; t <= numToppings; t++) {
     // pull meat or veggie based on preferences
-    const useVeggies = pickAToppingGroup(veggieSlider)
+    const useVeggies = useVeggieTopping(veggieSlider)
     const toppingGroup = useVeggies ? nonmeats : meats
     const idx = Math.floor(toppingGroup.length * Math.random())
     const toppingToAdd = toppingGroup[idx]

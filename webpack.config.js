@@ -1,5 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
   entry: './src/app.js',
@@ -15,13 +16,13 @@ module.exports = {
         loader: 'vue-loader',
         options: {
           loaders: {
-            // Since sass-loader (weirdly) has SCSS as its default parse mode, we map
-            // the "scss" and "sass" values for the lang attribute to the right configs here.
-            // other preprocessors should work out of the box, no loader config like this nessessary.
             'scss': 'vue-style-loader!css-loader!sass-loader',
             'sass': 'vue-style-loader!css-loader!sass-loader?indentedSyntax'
+            // 'sass': ExtractTextPlugin.extract({
+            //   'loader': 'css-loader!sass-loader?indentedSyntax',
+            //   'fallbackLoader': 'vue-style-loader'
+            // })
           }
-          // other vue-loader options go here
         }
       },
       {
@@ -38,6 +39,9 @@ module.exports = {
       }
     ]
   },
+  plugins: [
+    new ExtractTextPlugin(path.join('css', 'style.[contenthash].css'))
+  ],
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue.common.js',
@@ -53,11 +57,11 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     proxy: {
-      '/power':{
-        target:'https://order.dominos.com',
-        secure:false,
-        changeOrigin:true,
-        proxyTimeout:500
+      '/power': {
+        target: 'https://order.dominos.com',
+        secure: false,
+        changeOrigin: true,
+        proxyTimeout: 500
       }
     }
   },
