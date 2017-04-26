@@ -75,6 +75,9 @@ const useVeggieTopping = (veggieSlider) => {
 }
 
 const selectToppings = (store) => {
+  // we need shallow copies of the store data because we want to remove dupes if the option is set
+  // the spread operator works because we don't modify objects, we just splice them out
+
   const toppings = []
   const cheeseOption = store.getters.getCheeseOption
   const numToppings = cheeseOption ? store.getters.getToppingOption + 1 : store.getters.getToppingOption

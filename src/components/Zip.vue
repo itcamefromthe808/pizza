@@ -11,6 +11,7 @@
       <div class="control">
         <button class="button is-info" :disabled="!fields.passed()" @click.prevent="setZip(zip)">Search your Zip Code!</button>
       </div>
+    </div>
   </form>
 </template>
 
@@ -20,11 +21,6 @@ import { mapActions } from 'vuex'
 
 export default {
   name: 'zip',
-  data () {
-    return {
-      zip:''
-    };
-  },
   methods: mapActions([
     'setZip'
   ])
