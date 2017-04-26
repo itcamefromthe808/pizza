@@ -21,7 +21,7 @@
         </tr>
       </tbody>
     </table>
-    <button class="button is-primary" :disabled="!hasMenu" @click.prevent="rebuildPizza">Rebuild Pizza</button>
+    <button class="button is-primary" :disabled="!hasMenu" @click.prevent="rebuildPizza">Build another order</button>
   </section>
 </template>
 
