@@ -1,14 +1,11 @@
 <template>
   <main id="app">
-    <div class="content">
-      <h1>Welcome to the random Domino's pizza generator!</h1>
-    </div>
+
+    <Hero></Hero>
 
     <Options></Options>
 
-    <Zip></Zip>
-
-    <Restaurants></Restaurants>
+    <Store></Store>
 
     <Order></Order>
 
@@ -16,17 +13,17 @@
 </template>
 
 <script>
-import Zip from './Zip.vue'
-import Restaurants from './Restaurants.vue'
+import Hero from './Hero.vue'
 import Options from './Options.vue'
+import Store from './Store.vue'
 import Order from './Order.vue'
 
 export default {
   name: 'app',
   components: {
-    Zip,
-    Restaurants,
+    Hero,
     Options,
+    Store,
     Order
   }
 }
@@ -41,9 +38,9 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin: 60px auto 0;
+  /*text-align: center;*/
   width:80%;
+  margin:0 auto;
+  color: #2c3e50;
 }
 </style>

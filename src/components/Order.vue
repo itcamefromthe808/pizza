@@ -1,14 +1,13 @@
 <template>
-  <div class="content">
-    <h2>Here's your order!</h2>
-
-    <table>
+  <section class="section">
+    <div class="content"><h2>Here's your order!</h2></div>
+    <table class="table">
       <thead>
         <tr>
-          <th>Pizza</th>
-          <th>Size:</th>
-          <th>Crust:</th>
-          <th>Toppings:</th>
+          <th></th>
+          <th>Size</th>
+          <th>Crust</th>
+          <th>Toppings</th>
         </tr>
       </thead>
       <tbody>
@@ -22,8 +21,8 @@
         </tr>
       </tbody>
     </table>
-    <button @click.prevent="rebuildPizza">Rebuild Pizza</button>
-  </div>
+    <button class="button is-primary" @click.prevent="rebuildPizza">Rebuild Pizza</button>
+  </section>
 </template>
 
 <script>

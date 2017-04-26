@@ -27,7 +27,7 @@ const hungerPerPie = [
   }
 ]
 
-const pieScalingFactor = 2
+const pieScalingFactor = 1.5
 
 // helper utilities
 const getIdealPies = (people) => {

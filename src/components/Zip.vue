@@ -1,12 +1,16 @@
 <template>
   <form>
-    <h2>Let's find a store near you!</h2>
-    <fieldset>
-      <legend>Zip Code</legend>
-      <input type="text" name="zipcode" v-model="zip" placeholder="Enter Zip Code" v-validate data-vv-rules="required|digits:5"></input>
-    </fieldset>
-    <span v-show="errors.has('zipcode')" class="help is-danger">{{ errors.first('zipcode') }}</span>
-    <button :disabled="!fields.passed()" @click.prevent="setZip(zip)">Search your Zip Code!</button>
+    <label class="label">
+      Zip Code
+      <span v-show="errors.has('zipcode')" class="help is-danger">{{ errors.first('zipcode') }}</span>
+    </label>
+    <div class="field has-addons">
+      <div class="control">
+        <input class="input" type="text" name="zipcode" v-model="zip" placeholder="Enter Zip Code" v-validate data-vv-rules="required|digits:5">
+      </div>
+      <div class="control">
+        <button class="button is-info" :disabled="!fields.passed()" @click.prevent="setZip(zip)">Search your Zip Code!</button>
+      </div>
   </form>
 </template>
 
@@ -15,6 +19,7 @@
 import { mapActions } from 'vuex'
 
 export default {
+  name: 'zip',
   data () {
     return {
       zip:''
