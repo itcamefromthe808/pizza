@@ -1,6 +1,8 @@
 <template>
   <main id="app">
-    <h1>Welcome to the random Domino's pizza generator!</h1>
+    <div class="content">
+      <h1>Welcome to the random Domino's pizza generator!</h1>
+    </div>
 
     <Options></Options>
 
@@ -31,8 +33,7 @@ export default {
 </script>
 
 <style lang="sass">
-  @import '~bulma/sass/utilities/_all'
-  @import '~bulma/sass/base/_all'
+  @import '~bulma/bulma.sass'
 </style>
 
 <style lang="css">
