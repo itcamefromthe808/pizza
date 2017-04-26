@@ -30,22 +30,29 @@
     <div class="columns">
       <div class="field column">
         <div class="control">
-          <label class="label" for="noCheese">Skip the Cheese?</label>
-          <input class="checkbox" type="checkbox" name="noCheese" @change="setCheeseOption">
+          <label class="label" for="noCheese">
+            Skip the Cheese?
+            <input class="checkbox" type="checkbox" name="noCheese" @change="setCheeseOption">
+            <p class="help">This adds another random topping</p>
+          </label>
         </div>
       </div>
 
       <div class="field column">
         <div class="control">
-          <label class="label" for="canDupeToppings">Exclude Duplicate Toppings?</label>
-          <input class="checkbox" type="checkbox" name="canDupeToppings" @change="setDupeOption">
+          <label class="label" for="canDupeToppings">
+            Exclude Duplicate Toppings?
+            <input class="checkbox" type="checkbox" name="canDupeToppings" @change="setDupeOption">
+          </label>
         </div>
       </div>
 
       <div class="field column">
         <div class="control">
           <label class="label" for="veggieScale">Veggie to Meat ratio?</label>
+          More Meat
           <input type="range" name="veggieScale" min="0" max="100" :value="veggie" @change="setVeggieSlider">
+          More Veggies
         </div>
       </div>
     </div>
