@@ -80,6 +80,7 @@ const getValidNonMeats = (menu) => {
 }
 
 const getters = {
+  hasMenu: state => state.raw.length !== 0,
   getSizes: state => state.sizes,
   getCrusts: state => state.crusts,
   getSauces: state => state.sauces,

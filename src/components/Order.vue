@@ -21,7 +21,7 @@
         </tr>
       </tbody>
     </table>
-    <button class="button is-primary" @click.prevent="rebuildPizza">Rebuild Pizza</button>
+    <button class="button is-primary" :disabled="!hasMenu" @click.prevent="rebuildPizza">Rebuild Pizza</button>
   </section>
 </template>
 
@@ -30,7 +30,8 @@ import { mapGetters,mapActions } from 'vuex'
 
 export default {
   computed: mapGetters({
-    pizzas: 'getPizzaShortDescriptions'
+    pizzas: 'getPizzaShortDescriptions',
+    hasMenu: 'hasMenu'
   }),
   methods: mapActions([
     'rebuildPizza'
