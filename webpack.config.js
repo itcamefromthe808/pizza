@@ -1,6 +1,8 @@
-var path = require('path')
-var webpack = require('webpack')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
+const path = require('path')
+const webpack = require('webpack')
+
+const stores = require('./src/assets/store-locator.json')
+const menu = require('./src/assets/menu.json')
 
 module.exports = {
   entry: './src/app.js',
@@ -39,9 +41,6 @@ module.exports = {
       }
     ]
   },
-  plugins: [
-    new ExtractTextPlugin(path.join('css', 'style.[contenthash].css'))
-  ],
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue.common.js',
@@ -61,7 +60,17 @@ module.exports = {
         target: 'https://order.dominos.com',
         secure: false,
         changeOrigin: true,
-        proxyTimeout: 500
+        proxyTimeout: 500,
+        onError: (noterror, req, res) => {
+          res.writeHead(200, {
+            'Content-Type': 'application/json'
+          })
+          if ((/store\-locator/).test(req.path)) {
+            res.end(JSON.stringify(stores))
+          } else {
+            res.end(JSON.stringify(menu))
+          }
+        }
       }
     }
   },

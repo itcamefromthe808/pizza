@@ -1,7 +1,7 @@
 import pizza from 'dominos'
 
-import storeData from '../assets/store-locator.json'
-import menuData from '../assets/menu.json'
+// import storeData from '../assets/store-locator.json'
+// import menuData from '../assets/menu.json'
 
 export default {
   findStore (zip, success, failure) {
@@ -14,7 +14,7 @@ export default {
           success(payload.result.Stores)
         } else {
           // failure(payload)
-          success(storeData.Stores)
+          // success(storeData.Stores)
         }
       }
     )
@@ -28,7 +28,7 @@ export default {
           success(payload.result)
         } else {
           // failure(payload)
-          success(menuData)
+          // success(menuData)
         }
       }
     )

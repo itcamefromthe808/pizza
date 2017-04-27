@@ -2,9 +2,6 @@
 
 > Random Domino's pizza generator
 
-## TODO:
-- Tweak pie size logic for large orders
-
 ## Build Setup
 
 ``` bash
@@ -18,4 +15,9 @@ npm run dev
 npm run build
 ```
 
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## Heads Up!!
+If `ncu` is run or if node modules are updated, make sure to update the urls.json in the dominos pizza api to point to local
+Yeah, this is bad, but the only clean way would be to support the API directly in this
+
+## TODO
+proper failure states for API calls

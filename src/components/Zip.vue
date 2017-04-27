@@ -21,6 +21,11 @@ import { mapActions } from 'vuex'
 
 export default {
   name: 'zip',
+  data () {
+    return {
+      zip:''
+    };
+  },
   methods: mapActions([
     'setZip'
   ])
