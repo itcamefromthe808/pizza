@@ -3,7 +3,7 @@ import VeeValidate from 'vee-validate'
 
 import App from './components/App.vue'
 
-Vue.use(VeeValidate);
+Vue.use(VeeValidate)
 
 import store from './store/index.js'
 
