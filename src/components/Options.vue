@@ -63,6 +63,7 @@
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
+  name: 'options',
   computed: mapGetters({
     'toppings': 'getToppingOption',
     'hunger': 'getHungerOption',

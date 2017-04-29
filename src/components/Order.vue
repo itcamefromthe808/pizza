@@ -29,6 +29,7 @@
 import { mapGetters,mapActions } from 'vuex'
 
 export default {
+  name: 'order',
   computed: mapGetters({
     pizzas: 'getPizzaShortDescriptions',
     hasMenu: 'hasMenu'

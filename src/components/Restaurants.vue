@@ -20,6 +20,7 @@
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
+  name: 'restaurants',
   computed: mapGetters({
     restaurants: 'allRestaurants'
   }),
