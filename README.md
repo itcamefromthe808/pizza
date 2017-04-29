@@ -28,6 +28,6 @@ If `ncu` is run or if node modules are updated, make sure to update the urls.jso
 Yeah, this is bad, but the only clean way would be to support the API directly in this
 
 ## TODO
-proper failure handlers for API calls
-improve styles
-use button click rather than select onchange to create the order
+- proper failure handlers for API calls
+- improve styles
+- use button click rather than select onchange to create the order
