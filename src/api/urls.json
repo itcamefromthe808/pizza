@@ -1,0 +1,13 @@
+{
+  "store": {
+    "find": "http://localhost:8080/power/store-locator?s=${line1}&c=${line2}&type=${type}",
+    "info": "http://localhost:8080/power/store/${storeID}/profile",
+    "menu": "http://localhost:8080/power/store/${storeID}/menu?lang=${lang}&structured=true"
+  },
+  "order": {
+    "validate": "http://localhost:8080/power/validate-order",
+    "price": "http://localhost:8080/power/price-order",
+    "place": "http://localhost:8080/power/place-order"
+  },
+  "track": "https://trkweb.dominos.com/orderstorage/GetTrackerData?"
+}
